@@ -53,7 +53,6 @@ class Lisp
 		$code = implode(' ', $args);
 
 		$return = $this->getDesmondInstance()->run($code);
-		var_dump($return);
 		$return = $this->getDesmondInstance()->pretty($return);
 
 		Queue::fromContainer($container)->privmsg($source->getName(), '#> ' . $return);
