@@ -1,0 +1,19 @@
+{
+    "name": "yoshi2889/wphp-module-lisp",
+    "description": "LISP interpreter module for WildPHP",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Yoshi2889",
+            "email": "rick.2889@gmail.com"
+        }
+    ],
+    "require": {
+        "archer70/desmond": "^0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yoshi2889\\WPHPModules\\Lisp\\": "src"
+        }
+    }
+}
