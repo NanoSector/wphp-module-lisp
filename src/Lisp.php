@@ -54,6 +54,9 @@ class Lisp
 
 		$return = $this->getDesmondInstance()->run($code);
 		$return = $this->getDesmondInstance()->pretty($return);
+		$return = str_replace("\n", " || ", str_replace("\r", "", $return));
+		if (strlen($return) > 150)
+			$return = substr($return, 0, 150) . '... (truncated output)';
 
 		Queue::fromContainer($container)->privmsg($source->getName(), '#> ' . $return);
 	}
