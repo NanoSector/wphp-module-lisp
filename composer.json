@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "archer70/desmond": "^0.2"
+        "archer70/desmond": "^0"
     },
     "autoload": {
         "psr-4": {
