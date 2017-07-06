@@ -26,9 +26,10 @@ use WildPHP\Core\Commands\CommandHelp;
 use WildPHP\Core\ComponentContainer;
 use WildPHP\Core\Connection\Queue;
 use WildPHP\Core\ContainerTrait;
+use WildPHP\Core\Modules\BaseModule;
 use WildPHP\Core\Users\User;
 
-class Lisp
+class Lisp extends BaseModule
 {
 	use ContainerTrait;
 
@@ -48,6 +49,12 @@ class Lisp
 		$this->setDesmondInstance(new Desmond());
 	}
 
+	/**
+	 * @param Channel $source
+	 * @param User $user
+	 * @param array $args
+	 * @param ComponentContainer $container
+	 */
 	public function lispCommand(Channel $source, User $user, array $args, ComponentContainer $container)
 	{
 		$code = implode(' ', $args);
