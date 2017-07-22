@@ -83,4 +83,12 @@ class Lisp extends BaseModule
 	{
 		$this->desmondInstance = $desmondInstance;
 	}
+
+	/**
+	 * @return string
+	 */
+	public static function getSupportedVersionConstraint(): string
+	{
+		return '^3.0.0';
+	}
 }
