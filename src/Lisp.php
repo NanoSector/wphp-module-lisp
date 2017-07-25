@@ -41,7 +41,7 @@ class Lisp extends BaseModule
 	public function __construct(ComponentContainer $container)
 	{
 		$commandHelp = new CommandHelp();
-		$commandHelp->addPage('Execute LISP code in Desmond. Usage: lisp [code]');
+		$commandHelp->append('Execute LISP code in Desmond. Usage: lisp [code]');
 		CommandHandler::fromContainer($container)
 			->registerCommand('lisp', [$this, 'lispCommand'], $commandHelp, 1, -1, 'lisp');
 
