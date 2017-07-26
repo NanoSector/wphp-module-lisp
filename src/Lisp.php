@@ -38,6 +38,11 @@ class Lisp extends BaseModule
 	 */
 	protected $desmondInstance;
 
+	/**
+	 * Lisp constructor.
+	 *
+	 * @param ComponentContainer $container
+	 */
 	public function __construct(ComponentContainer $container)
 	{
 		$commandHelp = new CommandHelp();
