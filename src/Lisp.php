@@ -21,8 +21,11 @@ namespace Yoshi2889\WPHPModules\Lisp;
 
 use Desmond\Desmond;
 use WildPHP\Core\Channels\Channel;
+use WildPHP\Core\Commands\Command;
 use WildPHP\Core\Commands\CommandHandler;
 use WildPHP\Core\Commands\CommandHelp;
+use WildPHP\Core\Commands\ParameterStrategy;
+use WildPHP\Core\Commands\StringParameter;
 use WildPHP\Core\ComponentContainer;
 use WildPHP\Core\Connection\Queue;
 use WildPHP\Core\ContainerTrait;
@@ -45,10 +48,17 @@ class Lisp extends BaseModule
 	 */
 	public function __construct(ComponentContainer $container)
 	{
-		$commandHelp = new CommandHelp();
-		$commandHelp->append('Execute LISP code in Desmond. Usage: lisp [code]');
-		CommandHandler::fromContainer($container)
-			->registerCommand('lisp', [$this, 'lispCommand'], $commandHelp, 1, -1, 'lisp');
+		CommandHandler::fromContainer($container)->registerCommand('lisp',
+			new Command(
+				[$this, 'lispCommand'],
+				new ParameterStrategy(1, -1, [
+					'code' => new StringParameter()
+				], true),
+				new CommandHelp([
+					'Execute LISP code in Desmond. Usage: lisp [code]'
+				]),
+				'lisp'
+			));
 
 		$this->setContainer($container);
 		$this->setDesmondInstance(new Desmond());
@@ -62,7 +72,7 @@ class Lisp extends BaseModule
 	 */
 	public function lispCommand(Channel $source, User $user, array $args, ComponentContainer $container)
 	{
-		$code = implode(' ', $args);
+		$code = $args['code'];
 
 		$return = $this->getDesmondInstance()->run($code);
 		$return = $this->getDesmondInstance()->pretty($return);
